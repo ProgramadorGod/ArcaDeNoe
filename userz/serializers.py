@@ -22,7 +22,10 @@ class AccountSerializer(serializers.ModelSerializer):
             "id",
             "username",
             "email",
-
+            "first_name",
+            "last_name",
+            "UserType",
+            "profile_picture"
         ]
 
 

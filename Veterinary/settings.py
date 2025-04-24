@@ -40,7 +40,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Veterinary.urls'
@@ -95,6 +95,17 @@ USE_TZ = True
 
 # ARCHIVOS ESTÁTICOS
 STATIC_URL = 'static/'
+
+# Asegurate de esto:
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SAMESITE = 'Lax'  # O 'None' si usás subdominios + HTTPS
+CSRF_COOKIE_SECURE = True     # Solo en producción con HTTPS
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Usa la base de datos para las sesiones
+SESSION_COOKIE_NAME = 'sessionid'  
 
 # AUTENTICACIÓN POR SESIÓN
 REST_FRAMEWORK = {

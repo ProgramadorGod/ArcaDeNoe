@@ -16,13 +16,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "rest_framework",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "dj_rest_auth",
+    'rest_framework',
+    'rest_framework_simplejwt',
     "rest_framework.authtoken",
     "corsheaders",
     
@@ -101,20 +102,26 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SAMESITE = 'Lax'  # O 'None' si usás subdominios + HTTPS
 CSRF_COOKIE_SECURE = True     # Solo en producción con HTTPS
-
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+]
 CORS_ALLOW_ALL_ORIGINS = True
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Usa la base de datos para las sesiones
 SESSION_COOKIE_NAME = 'sessionid'  
 
 # AUTENTICACIÓN POR SESIÓN
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
+
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ),
+    ],
 }
 
 # MODELO DE USUARIO PERSONALIZADO
